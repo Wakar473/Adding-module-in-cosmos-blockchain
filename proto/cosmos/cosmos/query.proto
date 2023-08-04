@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package cosmos.cosmos;
 
 import "gogoproto/gogo.proto";
@@ -10,17 +11,49 @@ option go_package = "cosmos/x/cosmos/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/cosmos/cosmos/params";
+  
+  }
+  
+  // Queries a list of SayHello items.
+  rpc SayHello (QuerySayHelloRequest) returns (QuerySayHelloResponse) {
+    option (google.api.http).get = "/cosmos/cosmos/say_hello/{name}";
+  
+  }
+  
+  // Queries a list of HeyHello items.
+  rpc HeyHello (QueryHeyHelloRequest) returns (QueryHeyHelloResponse) {
+    option (google.api.http).get = "/cosmos/cosmos/hey_hello/{to}/{wakar}";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QuerySayHelloRequest {
+  string name = 1;
+}
+
+message QuerySayHelloResponse {
+  string name = 1;
+}
+
+message QueryHeyHelloRequest {
+  string to    = 1;
+  string wakar = 2;
+}
+
+message QueryHeyHelloResponse {
+  string name = 1;
+}
+

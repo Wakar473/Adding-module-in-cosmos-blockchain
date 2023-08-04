@@ -10390,6 +10390,47 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /cosmos/cosmos/hey_hello/{to}/{wakar}:
+    get:
+      summary: Queries a list of HeyHello items.
+      operationId: CosmosCosmosHeyHello
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: to
+          in: path
+          required: true
+          type: string
+        - name: wakar
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /cosmos/cosmos/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -10424,6 +10465,43 @@ paths:
                     '@type':
                       type: string
                   additionalProperties: {}
+      tags:
+        - Query
+  /cosmos/cosmos/say_hello/{name}:
+    get:
+      summary: Queries a list of SayHello items.
+      operationId: CosmosCosmosSayHello
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: name
+          in: path
+          required: true
+          type: string
       tags:
         - Query
   /cosmos/distribution/v1beta1/community_pool:
@@ -56253,6 +56331,11 @@ definitions:
   cosmos.cosmos.Params:
     type: object
     description: Params defines the parameters for the module.
+  cosmos.cosmos.QueryHeyHelloResponse:
+    type: object
+    properties:
+      name:
+        type: string
   cosmos.cosmos.QueryParamsResponse:
     type: object
     properties:
@@ -56260,6 +56343,11 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  cosmos.cosmos.QuerySayHelloResponse:
+    type: object
+    properties:
+      name:
+        type: string
   cosmos.crisis.v1beta1.MsgUpdateParamsResponse:
     type: object
     description: |-
